@@ -6,7 +6,7 @@ This repository contains **end-to-end UI tests** using [Playwright](https://play
 
 ### 1️⃣ Prerequisites
 
-- Node.js (LTS version recommended)
+Node.js (LTS version recommended)
 
 ### 2️⃣ Install Dependencies
 
