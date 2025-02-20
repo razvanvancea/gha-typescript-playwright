@@ -12,8 +12,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Download browsers
-        run: npx playwright install
+      - name: Install Playwright (Includes Browsers & Dependencies)
+        uses: microsoft/playwright-github-action@v1
 
       - name: Run Playwright tests
         run: npx playwright test
