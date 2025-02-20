@@ -3,10 +3,10 @@ import { test, expect } from '@playwright/test';
 test.describe('Playwright UI Tests', () => {
 
     test('Check Playwright page title', async ({ page }) => {
-        // Arrange
+        // Act
         await page.goto('https://playwright.dev/');
 
-        // Act & Assert
+        // Assert
         await expect(page).toHaveTitle(/Playwright/);
         test.info().annotations.push({ type: 'info', description: '✅ Title validation successful.' });
     });
