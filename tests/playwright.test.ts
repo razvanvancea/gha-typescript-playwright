@@ -2,13 +2,22 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Playwright UI Tests', () => {
 
+    test('Check Chriss´ page title', async ({ page }) => {
+        // Act
+        await page.goto('https://christianbaumann.dev/');
+
+        // Assert
+        await expect(page).toHaveTitle(/Christian Baumann/);
+        test.info().annotations.push({ type: 'info', description: '✅ Title validation successful (CB).' });
+    });
+
     test('Check Playwright page title', async ({ page }) => {
         // Act
         await page.goto('https://playwright.dev/');
 
         // Assert
         await expect(page).toHaveTitle(/Playwright/);
-        test.info().annotations.push({ type: 'info', description: '✅ Title validation successful.' });
+        test.info().annotations.push({ type: 'info', description: '✅ Title validation successful (PW).' });
     });
 
     test('Verify search functionality', async ({ page }) => {
