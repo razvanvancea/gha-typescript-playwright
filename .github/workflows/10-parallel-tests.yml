@@ -1,14 +1,15 @@
-name: "08 - Parallel Tests"
+name: "Parallel Tests"
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
-  e2e-tests:
+  build-and-test:
+    name: "Parallel Tests"
     runs-on: ubuntu-latest
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
