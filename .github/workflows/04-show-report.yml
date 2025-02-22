@@ -20,9 +20,8 @@ jobs:
         continue-on-error: true
         run: npx playwright test
 
-      - name: HTML Preview
-        id: html_preview
-        uses: pavi2410/html-preview-action@v4
+      - name: Publish Test Report
+        uses: turing85/publish-report@v2
         with:
-          html_file: 'playwright-report/index.html'
-          job_summary: true
+          report-name: Tests
+          report-path: 'playwright-report/index.html'
