@@ -1,0 +1,29 @@
+name: Show Playwright Reports
+on: push
+
+jobs:
+  test:
+    name: Show Playwright Reports
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright with dependencies
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Generate HTML Report
+        run: npx playwright show-report --output=target/reports/surefire.html
+
+      - name: HTML Preview
+        uses: pavi2410/html-preview-action@v4
+        with:
+          html_file: 'target/reports/surefire.html'
+          job_summary: true
