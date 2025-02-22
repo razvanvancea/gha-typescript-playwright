@@ -6,9 +6,10 @@ on:
 
 jobs:
   test:
+    name: Containerized Testing
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.50.0-focal
+      image: mcr.microsoft.com/playwright:v1.50.1
 
     steps:
       - name: Checkout repository
