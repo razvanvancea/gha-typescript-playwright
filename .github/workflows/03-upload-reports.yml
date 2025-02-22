@@ -1,0 +1,26 @@
+name: Upload Playwright Reports
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Upload Playwright Reports
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-artifacts
+          path: |
+            playwright-report
+            test-results
