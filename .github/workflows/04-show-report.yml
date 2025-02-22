@@ -20,8 +20,13 @@ jobs:
         continue-on-error: true
         run: npx playwright test
 
-      - name: Publish Test Report
-        uses: turing85/publish-report@v2
+      - name: Publish Test report
+        uses: phoenix-actions/test-reporting@v15
         with:
-          report-name: Tests
-          report-path: 'playwright-report/index.html'
+          name: 'Publish test report (Playwright)'
+          path: 'playwright-report/results.xml'
+          reporter: java-junit
+          list-tests: all
+          list-suites: all
+          fail-on-error: true
+          output-to: 'step-summary'
