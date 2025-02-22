@@ -1,0 +1,23 @@
+name: Run Playwright Tests (nightly)
+
+on:
+  schedule:
+    - cron: '0 1 * * 1-5'  # 1 AM UTC, Monday-Friday
+
+jobs:
+  test:
+    name: Run Playwright Tests (nightly)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright with dependencies
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
