@@ -19,11 +19,8 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
-      - name: Generate HTML Report
-        run: npx playwright show-report --output=target/reports/surefire.html
-
       - name: HTML Preview
         uses: pavi2410/html-preview-action@v4
         with:
-          html_file: 'target/reports/surefire.html'
+          html_file: 'playwright-report/index.html'
           job_summary: true
