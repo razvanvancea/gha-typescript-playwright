@@ -1,11 +1,11 @@
-name: Upload Playwright Reports
+name: Upload Playwright Reports  # Workflow name displayed in GitHub Actions.
 
-on: push
+on: push  # Triggers the workflow on every push event.
 
 jobs:
-  test:
-    name: Upload Playwright Reports
-    runs-on: ubuntu-latest
+  upload-reports:  # Defines a job for running tests and uploading reports.
+    name: Upload Playwright Reports  # The display name of the job.
+    runs-on: ubuntu-latest  # Specifies the Ubuntu environment for execution.
 
     steps:
       - name: Checkout repository
@@ -14,30 +14,30 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          cache: npm
+          node-version: lts/*  # Uses the latest Long-Term Support (LTS) version of Node.js.
+          cache: npm  # Enables automatic caching for npm dependencies.
 
       - name: Restore npm cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: ~/.npm  # Specifies the directory to cache (npm's global package storage).
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci  # Installs project dependencies.
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps  # Installs required browsers and dependencies.
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test  # Executes Playwright test suite.
 
-      - name: Upload Test Reports
+      - name: Upload Test Reports  # Uploads test results as artifacts for later review.
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-artifacts
+          name: playwright-artifacts  # The artifact name displayed in GitHub Actions.
           path: |
-            playwright-report
-            test-results
+            playwright-report  # Directory containing Playwright's test report.
+            test-results  # Directory containing detailed test results.

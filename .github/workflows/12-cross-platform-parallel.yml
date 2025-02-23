@@ -1,15 +1,15 @@
-name: "Cross-Platform Parallel Tests"
+name: "Cross-Platform Parallel Tests"  # Workflow name displayed in GitHub Actions.
 
-on: push
+on: push  # Triggers the workflow on every push event.
 
 jobs:
-  cross-platform-tests:
-    name: "Tests on ${{ matrix.os }} - ${{ matrix.browser }}"
-    runs-on: ${{ matrix.os }}
+  cross-platform-tests:  # Defines a job for running tests across different OS and browser combinations.
+    name: "Tests on ${{ matrix.os }} - ${{ matrix.browser }}"  # The display name of the job.
+    runs-on: ${{ matrix.os }}  # Specifies the OS environment for execution.
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        browser: [chromium, firefox, webkit]
+        os: [ubuntu-latest, windows-latest, macos-latest]  # Runs tests on Ubuntu, Windows, and macOS.
+        browser: [chromium, firefox, webkit]  # Runs tests on Chromium, Firefox, and WebKit.
 
     steps:
       - name: Checkout repository
@@ -18,22 +18,22 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          cache: npm
+          node-version: lts/*  # Uses the latest Long-Term Support (LTS) version of Node.js.
+          cache: npm  # Enables automatic caching for npm dependencies.
 
       - name: Restore npm cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: ~/.npm  # Specifies the directory to cache (npm's global package storage).
           key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci  # Installs project dependencies.
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps  # Installs required browsers and dependencies.
 
       - name: Run Playwright tests in parallel
-        run: npx playwright test --browser ${{ matrix.browser }}
+        run: npx playwright test --browser ${{ matrix.browser }}  # Runs tests for the specified browser across OS environments.

@@ -1,11 +1,11 @@
-name: Cache Dependencies for Playwright Tests
+name: Cache Dependencies for Playwright Tests  # Workflow name displayed in GitHub Actions.
 
-on: push
+on: push  # Triggers the workflow on every push event.
 
 jobs:
-  test:
-    name: Run Playwright Tests with Cache
-    runs-on: ubuntu-latest
+  cache-dependencies:  # Defines a job for running Playwright tests with caching.
+    name: Run Playwright Tests with Cache  # The display name of the job.
+    runs-on: ubuntu-latest  # Specifies the Ubuntu environment for execution.
 
     steps:
       - name: Checkout repository
@@ -14,22 +14,23 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          cache: npm
+          node-version: lts/*  # Uses the latest Long-Term Support (LTS) version of Node.js.
+          cache: npm  # Enables automatic caching for npm dependencies.
 
-      - name: Restore npm cache
+      - name: Restore npm cache  # Restores previously cached npm dependencies.
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: ~/.npm  # Specifies the directory to cache (npm's global package storage).
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # Generates a unique cache key based on OS and package-lock.json hash.
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-  # Fallback key if an exact match isn't found.
 
-      - name: Install dependencies
+      - name: Install dependencies  # Installs dependencies, using the cache if available.
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps  # Installs required browsers and dependencies.
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test  # Executes Playwright test suite.
