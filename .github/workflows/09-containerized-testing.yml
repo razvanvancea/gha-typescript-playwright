@@ -9,7 +9,7 @@ jobs:
     name: Containerized Testing
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.50.1
+      image: mcr.microsoft.com/playwright:v1.50.1-noble
 
     steps:
       - name: Checkout repository
