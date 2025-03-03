@@ -1,10 +1,10 @@
 name: Debugging GitHub Actions Workflows
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   debug_workflow:
+    name: Debugging GitHub Actions Workflows
     runs-on: ubuntu-latest
 
     steps:

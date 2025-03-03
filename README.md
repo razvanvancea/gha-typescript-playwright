@@ -320,3 +320,23 @@ Each exercise has:
 📍 **Relevant Documentation:**
 - [Enabling Debug Logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging)
 - [Understanding Workflow Logs](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/using-workflow-run-logs)
+
+---
+
+### 🔑 Exercise 14: Using Environment Variables and Secrets
+
+📂 **Workflow file:** `.github/workflows/14-env-secrets.yaml`  
+💡 **Goal:** Store and use environment variables and secrets securely in workflows.
+
+#### 📌 Instructions
+
+1. Create a new workflow file `14-env-secrets.yaml`.
+2. Define environment variables inside a job.
+3. Store a **GitHub Actions secret** (`MY_SECRET`) in the repository settings.
+4. Access the secret in a workflow using `${{ secrets.MY_SECRET }}`.
+5. Print environment variables but ensure secrets are not exposed in logs.
+6. Confirm that the workflow executes successfully without revealing sensitive information.
+
+📍 **Relevant Documentation:**
+- [Using Environment Variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables)
+- [Storing Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
