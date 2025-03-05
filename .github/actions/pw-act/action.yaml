@@ -1,5 +1,6 @@
 name: Playwright Summary
 description: "Formats Playwright test results for better readability"
+author: "Christian Baumann"
 
 runs:
   using: "composite"
@@ -8,6 +9,6 @@ runs:
     - name: Format test results
       # Reads the test report file and appends its content to GitHub job summary.
       run: |
-        npm install
+        npm ci
         npm run test
       shell: bash
