@@ -1,0 +1,13 @@
+name: PW workflow - TAD 2025 workshop
+
+on: workflow_dispatch
+
+jobs:
+  basic-tests:
+    name: basic-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: print the env vars
+        run: env
