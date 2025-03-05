@@ -1,18 +1,13 @@
-name: Run Custom Playwright Action
+name: Playwright Summary
+description: "Formats Playwright test results for better readability"
 
-on: push
+runs:
+  using: "composite"
 
-jobs:
-  custom-action:
-    name: Run Custom Playwright Action
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Simulate Playwright test output
-        # Creates a directory for test results and simulates a Playwright test report.
-        run: |
-          npm install
-          npm run test
+  steps:
+    - name: Format test results
+      # Reads the test report file and appends its content to GitHub job summary.
+      run: |
+        npm install
+        npm run test
+      shell: bash
