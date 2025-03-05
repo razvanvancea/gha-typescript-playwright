@@ -34,6 +34,8 @@ jobs:
             # Generates a unique cache key based on OS and package-lock.json hash.
           restore-keys: |
             ${{ runner.os }}-node-  # Fallback key if an exact match isn't found.
+      - name: npm list # Restores previously cached npm dependencies.
+        run: npm list
       - name: install pw dependencies
         run: npx playwright install --with-deps
       - name: run the tests
