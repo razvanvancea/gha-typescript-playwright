@@ -4,9 +4,8 @@ on: push
 
 jobs:
   setup:
-    name: Run Playwright Tests with Cache
+    name: prerequisites - caching npm packages
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
