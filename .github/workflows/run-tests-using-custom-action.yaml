@@ -1,4 +1,4 @@
-name: PW workflow - TAD 2025 workshop
+name: PW workflow - TAD 2025 workshop - custom action
 
 on: push
 
