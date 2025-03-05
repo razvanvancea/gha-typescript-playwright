@@ -3,7 +3,7 @@ name: Cache Dependencies for Playwright Tests
 on: push
 
 jobs:
-  tests:
+  setup:
     name: Run Playwright Tests with Cache
     runs-on: ubuntu-latest
 
@@ -22,6 +22,7 @@ jobs:
   basic-tests:
     name: basic-tests
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
