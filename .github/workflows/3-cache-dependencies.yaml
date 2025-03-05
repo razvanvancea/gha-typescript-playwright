@@ -1,58 +1,58 @@
-# name: Cache Dependencies for Playwright Tests
+name: CACHEEEE
 
-# on: push
+on: push
 
-# jobs:
-#   setup:
-#     name: cache
-#     runs-on: ubuntu-latest
+jobs:
+  setup:
+    name: Setup & Cache Dependencies
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-deps.outputs.cache-hit }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm # Enables automatic caching for npm dependencies.
 
-#       - name: Setup NodeJS
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: lts/*
-#           cache: npm # Enables automatic caching for npm dependencies.
+      - name: Cache npm dependencies
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-#       - name: Restore npm cache # Restores previously cached npm dependencies.
-#         uses: actions/cache@v4
-#         with:
-#           path: ~/.npm # Specifies the directory to cache (npm's global package storage).
-#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#           # Generates a unique cache key based on OS and package-lock.json hash.
-#           restore-keys: |
-#             ${{ runner.os }}-node-  # Fallback key if an exact match isn't found.
+      - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: npm ci
 
-#       - name: Install dependencies
-#         run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-#       - name: Install Playwright Browsers
-#         run: npx playwright install --with-deps
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: setup # Ensures `setup` runs first
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Run Playwright tests
-#         run: npx playwright test
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
 
-#   tests:
-#       name: tests
-#       runs-on: ubuntu-latest
+      - name: Use Cached npm Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
-#       steps:
-#         - name: Checkout repository
-#           uses: actions/checkout@v4
-
-#         - name: Setup NodeJS  # Step 2: Sets up Node.js to run the Playwright tests.
-#           uses: actions/setup-node@v4
-#           with:
-#             node-version: lts/*  # Uses the latest Long-Term Support (LTS) version of Node.js.
-
-#         - name: Install dependencies  # Step 3: Installs project dependencies.
-#           run: npm ci  # `npm ci` ensures a clean install based on package-lock.json.
-
-#         - name: Install Playwright Browsers  # Step 4: Installs necessary browsers for Playwright.
-#           run: npx playwright install --with-deps  # Includes dependencies required for the browsers.
-
-#         - name: Run Playwright tests  # Step 5: Executes the Playwright tests.
-#           run: npx playwright test  # Runs all tests defined in the Playwright test suite.
+      - name: Run Playwright Tests
+        run: npx playwright test
