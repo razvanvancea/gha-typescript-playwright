@@ -205,8 +205,8 @@ Each exercise has:
    The custom action processes the `test-results/report.txt` file, extracts its content, and formats a summary for display in GitHub job summaries.
 
    </details>
-5. Commit & push your changes.
-6. Observe the formatted test summary in the GitHub Actions logs.
+4. Commit & push your changes.
+5. Observe the formatted test summary in the GitHub Actions logs.
 
 ✨ Note: Feel free to come up with an own idea and implement it as custom action.
 
@@ -271,11 +271,11 @@ Each exercise has:
 2. Use a matrix strategy to define multiple browsers (e.g., `chromium`, `firefox`, `webkit`)
     - For Java: pass a system property (e.g. `-Dplaywright.browserName=${{ matrix.browser }}`).
     - For TypeScript: pass the browser name to `npx playwright test` (e.g. `--browser ${{ matrix.browser }}`).
-4. Java only: Update your project files so tests can pick the correct browser:
+3. Java only: Update your project files so tests can pick the correct browser:
     - Open `src/test/java/dev/christianbaumann/PlaywrightTest.java`
     - Uncomment the second @BeforeAll method and comment out the default one
-5. Commit & push the new workflow (and any modified files).
-6. Observe the concurrent runs in GitHub Actions. Each job in the matrix should execute in parallel, one for each browser/ environment.
+4. Commit & push the new workflow (and any modified files).
+5. Observe the concurrent runs in GitHub Actions. Each job in the matrix should execute in parallel, one for each browser/ environment.
 
 🔗 Relevant Documentation:
 - [Using a matrix strategy](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
