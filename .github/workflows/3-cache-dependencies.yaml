@@ -17,6 +17,12 @@ jobs:
           cache: npm # Enables automatic caching for npm dependencies.
       - name: Install dependencies
         run: npm ci
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/node_modules
+            ~/package-lock.json
 
   basic-tests:
     name: basic-tests
@@ -28,11 +34,9 @@ jobs:
       - name: Restore npm cache # Restores previously cached npm dependencies.
         uses: actions/cache@v4
         with:
-          path: ~/.npm # Specifies the directory to cache (npm's global package storage).
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          # Generates a unique cache key based on OS and package-lock.json hash.
-          restore-keys: |
-            ${{ runner.os }}-node-  # Fallback key if an exact match isn't found.
+          path: |
+            ~/node_modules
+            ~/package-lock.json
       - name: install pw dependencies
         run: npx playwright install --with-deps
       - name: run the tests
