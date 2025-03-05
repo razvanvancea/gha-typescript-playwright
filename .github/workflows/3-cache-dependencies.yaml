@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
       - name: set cache for npm cache # Restores previously cached npm dependencies.
         uses: actions/cache@v4
         with:
           path: ~/.npm # Specifies the directory to cache (npm's global package storage).
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           # Generates a unique cache key based on OS and package-lock.json hash.
-      - name: Install dependencies
-        run: npm ci
 
   basic-tests:
     name: basic-tests
