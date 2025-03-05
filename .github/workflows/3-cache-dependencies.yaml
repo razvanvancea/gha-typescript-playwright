@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Restore npm cache # Restores previously cached npm dependencies.
+      - name: set cache for npm cache # Restores previously cached npm dependencies.
         uses: actions/cache@v4
         with:
           path: ~/.npm # Specifies the directory to cache (npm's global package storage).
