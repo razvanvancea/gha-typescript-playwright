@@ -10,14 +10,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm # Enables automatic caching for npm dependencies.
       - name: Install dependencies
         run: npm ci
-      - name: Cache Gradle packages
+      - name: cache npm packages
         uses: actions/cache@v4
         with:
           path: |
