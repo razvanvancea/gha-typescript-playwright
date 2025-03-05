@@ -1,6 +1,6 @@
 name: PW workflow - TAD 2025 workshop
 
-on: workflow_dispatch
+on: push
 
 jobs:
   basic-tests:
